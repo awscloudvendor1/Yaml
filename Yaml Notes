@@ -1,1 +1,464 @@
+YAML Ain't Markup Language is a data serialization language that matches user’s expectations about data. It designed to be human friendly and works perfectly with other programming languages. It is useful to manage data and includes Unicode printable characters. This chapter will give you an introduction to YAML and gives you an idea about its features.
+
+Format
+Consider the text shown below −
+
+Quick brown fox jumped over the lazy dog.
+The YAML text for this will be represented as shown below −
+
+yaml.load(Quick brown fox jumped over the lazy dog.)
+>>'Quick brown fox jumped over the lazy dog.'
+Note that YAML takes the value in string format and represents the output as mentioned above.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples
+Let us understand the formats in YAML with the help of the following examples −
+
+Consider the following point number of “pi”, which has a value of 3.1415926. In YAML, it is represented as a floating number as shown below −
+
+>>> yaml.load('3.1415926536')
+3.1415926536
+
+Suppose, multiple values are to be loaded in specific data structure as mentioned below −
+
+eggs
+ham
+spam
+French basil salmon terrine
+
+When you load this into YAML, the values are taken in an array data structure which is a form of list. The output is as shown below −
+
+>>> yaml.load('''
+- eggs
+- ham
+- spam
+- French basil salmon terrine
+''')
+['eggs', 'ham', 'spam', 'French basil salmon terrine']
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Synopsis of YAML Basic Elements
+The synopsis of YAML basic elements is given here: Comments in YAML begins with the (#) character.
+
+Comments must be separated from other tokens by whitespaces.
+
+Indentation of whitespace is used to denote structure.
+
+Tabs are not included as indentation for YAML files.
+
+List members are denoted by a leading hyphen (-).
+
+List members are enclosed in square brackets and separated by commas.
+
+Associative arrays are represented using colon ( : ) in the format of key value pair. They are enclosed in curly braces {}.
+
+Multiple documents with single streams are separated with 3 hyphens (---).
+
+Repeated nodes in each file are initially denoted by an ampersand (&) and by an asterisk (*) mark later.
+
+YAML always requires colons and commas used as list separators followed by space with scalar values.
+
+Nodes should be labelled with an exclamation mark (!) or double exclamation mark (!!), followed by string which can be expanded into an URI or URL.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+indentation and separation are two main concepts when you are learning any programming language. 
+Indentation of YAML
+YAML does not include any mandatory spaces. Further, there is no need to be consistent. The valid YAML indentation is shown below −
+a:
+   b:
+      - c
+      -  d
+      - e
+f:
+      "ghi"
+      
+      You should remember the following rules while working with indentation in YAML:Flow blocks must be intended with at least some spaces with surrounding current block level.
+
+Flow content of YAML spans multiple lines. The beginning of flow content begins with { or [.
+
+Block list items include same indentation as the surrounding block level because - is considered as a part of indentation.
+
+Example of Intended Block
+Observe the following code that shows indentation with examples −
+
+--- !clarkevans.com/^invoice
+invoice: 34843
+date   : 2001-01-23
+bill-to: &id001
+   given  : Chris
+   family : Dumars
+   address:
+      lines: |
+            458 Walkman Dr.
+            Suite #292
+      city    : Royal Oak
+      state   : MI
+      postal  : 48046
+ship-to: *id001
+    - sku         : BL394D
+      quantity    : 4
+      description : Basketball
+      price       : 450.00
+   - sku         : BL4438H
+      quantity    : 1
+      description : Super Hoop
+      price       : 2392.00
+tax  : 251.42
+total: 4443.52
+comments: >
+    Late afternoon is best.
+    Backup contact is Nancy
+    Billsmer @ 338-4338.
+    
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------    
+    
+    Separation of Strings
+Strings are separated using double-quoted string. If you escape the newline characters in a given string, it is completely removed and translated into space value.
+
+Example
+In this example we have focused listing of animals listed as an array structure with data type of string. Every new element is listed with a prefix of hyphen as mentioned as prefix.
+
+-
+- Cat
+- Dog
+- Goldfish
+-
+- Python
+- Lion
+- Tiger
+
+Another example to explain string representation in YAML is mentioned below.
+
+errors:
+messages:
+already_confirmed: "was already confirmed, please try signing in"
+confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
+expired: "has expired, please request a new one"
+not_found: "not found"
+not_locked: "was not locked"
+not_saved:
+one: "1 error prohibited this %{resource} from being saved:"
+other: "%{count} errors prohibited this %{resource} from being saved:"
+
+
+This example refers to the set of error messages which a user can use just by mentioning the key aspect and to fetch the values accordingly. This pattern of YAML follows the structure of JSON which can be understood by user who is new to YAML.
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+YAML - Comments
+
+Now that you are comfortable with the syntax and basics of YAML, let us proceed further into its details. In this chapter, we will see how to use comments in YAML.
+
+YAML supports single line comments. Its structure is explained below with the help of an example −
+
+# this is single line comment.
+YAML does not support multi line comments. If you want to provide comments for multiple lines, you can do so as shown in the example below −
+
+# this
+# is a multiple
+# line comment
+Features of Comments
+The features of comments in YAML are given below −
+
+A commented block is skipped during execution.
+
+Comments help to add description for specified code block.
+
+Comments must not appear inside scalars.
+YAML does not include any way to escape the hash symbol (#) so within multi-line string so there is no way to divide the comment from the raw string value.
+
+The comments within a collection are shown below −
+
+key: #comment 1
+- value line 1
+#comment 2
+- value line 2
+#comment 3
+- value line 3
+The shortcut key combination for commenting YAML blocks is Ctrl+Q.
+
+If you are using Sublime Text editor, the steps for commenting the block are mentioned below −
+
+Select the block. Use “CTRL + /” on Linux and Windows and “CMD+/” for Mac operating system. Execute the block.
+Note that the same steps are applicable if you are using Visual Studio Code Editor. It is always recommended to use Sublime Text Editor for creating YAML files as it supported by most operating systems and includes developer friendly shortcut keys.
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+YAML - Collections and Structures
+
+YAML includes block collections which use indentation for scope. Here, each entry begins with a new line. Block sequences in collections indicate each entry with a dash and space (-). In YAML, block collections styles are not denoted by any specific indicator. Block collection in YAML can distinguished from other scalar quantities with an identification of key value pair included in them.
+
+Mappings are the representation of key value as included in JSON structure. It is used often in multi-lingual support systems and creation of API in mobile applications. Mappings use key value pair representation with the usage of colon and space (:).
+
+Examples
+Consider an example of sequence of scalars, for example a list of ball players as shown below −
+
+- Mark Joseph
+- James Stephen
+- Ken Griffey
+The following example shows mapping scalars to scalars −
+
+hr: 87
+avg: 0.298
+rbi: 149
+
+The following example shows mapping scalars to sequences −
+
+European:
+- Boston Red Sox
+- Detroit Tigers
+- New York Yankees
+
+national:
+- New York Mets
+- Chicago Cubs
+- Atlanta Braves
+
+Collections can be used for sequence mappings which are shown below −
+
+-
+name: Mark Joseph
+hr: 87
+avg: 0.278
+-
+name: James Stephen
+hr: 63
+avg: 0.288
+With collections, YAML includes flow styles using explicit indicators instead of using indentation to denote space. The flow sequence in collections is written as comma separated list enclosed in square brackets. The best illustration for collection which is included in PHP frameworks like symphony.
+
+[PHP, Perl, Python]
+These collections are stored in documents. The separation of documents in YAML is denoted with three hyphens or dashes (---). The end of document is marked with three dots (…).
+
+The separation of documents in YAML is denoted by three dashes (---). The end of document is represented with three dots (…).
+
+The document representation is referred as structure format which is mentioned below −
+
+# Ranking of 1998 home runs
+---
+- Mark Joseph
+- James Stephen
+- Ken Griffey
+
+# Team ranking
+---
+- Chicago Cubs
+- St Louis Cardinals
+A question mark with a combination of space indicates a complex mapping in structure. Within a block collection, a user can include structure with a dash, colon and question mark. The following example shows the mapping between sequences −
+
+- 2001-07-23
+? [ New York Yankees,Atlanta Braves ]
+: [ 2001-07-02, 2001-08-12, 2001-08-14]
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+YAML - Scalars and Tags
+
+Scalars in YAML are written in block format using a literal type which is denoted as(|). It denotes line breaks count. In YAML, scalars are written in folded style (>) where each line denotes a folded space which ends with an empty line or more indented line.
+
+New lines are preserved in literals are shown below −
+
+ASCII Art
+--- |
+\//||\/||
+// || ||__
+
+The folded newlines are preserved for more indented lines and blank lines as shown below −
+
+>
+Sammy Sosa completed another
+fine season with great stats.
+63 Home Runs
+0.288 Batting Average
+What a year!
+
+YAML flow scalars include plain styles and quoted styles. The double quoted style includes various escape sequences. Flow scalars can include multiple lines; line breaks are always folded in this structure.
+
+plain:
+This unquoted scalar
+spans many lines.
+quoted: "So does this
+quoted scalar.\n"
+In YAML, untagged nodes are specified with a specific type of the application. The examples of tags specification generally use seq, map and str types for YAML tag repository. The tags are represented as examples which are mentioned as below −
+
+Integer tags
+These tags include integer values in them. They are also called as numeric tags.
+
+canonical: 12345
+decimal: +12,345
+sexagecimal: 3:25:45
+octal: 014
+hexadecimal: 0xC
+
+Floating point numbers
+These tags include decimal and exponential values. They are also called as exponential tags.
+
+canonical: 1.23015e+3
+exponential: 12.3015e+02
+sexagecimal: 20:30.15
+fixed: 1,230.15
+negative infinity: -.inf
+not a number: .NaN
+
+Miscellaneous Tags
+It includes a variety of integer, floating and string values embedded in them. Hence it is called miscellaneous tags.
+
+null: ~
+true: y
+false: n
+string: '12345'
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+YAML - Full Length Example
+
+The following full-length example specifies the construct of YAML which includes symbols and various representations which will be helpful while converting or processing them in JSON format. These attributes are also called as key names in JSON documents. These notations are created for security purposes.
+
+The above YAML format represents various attributes of defaults, adapter, and host with various other attributes. YAML also keeps a log of every file generated which maintains a track of error messages generated. On converting the specified YAML file in JSON format we get a desired output as mentioned below −
+
+defaults: &defaults
+   adapter:  postgres
+   host:     localhost
+
+development:
+   database: myapp_development
+   <<: *defaults
+
+test:
+   database: myapp_test
+   <<: *defaults
+   
+   
+   Let’s convert the YAML to JSON format and check on the output.
+
+{
+   "defaults": {
+      "adapter": "postgres",
+      "host": "localhost"
+   },
+   "development": {
+      "database": "myapp_development",
+      "adapter": "postgres",
+      "host": "localhost"
+   },
+   "test": {
+      "database": "myapp_test",
+      "adapter": "postgres",
+      "host": "localhost"
+   }
+}
+The defaults key with a prefix of “ <<: *” is included as and when required with no need to write the same code snippet repeatedly.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+YAML - Processes
+
+YAML follows a standard procedure for Process flow. The native data structure in YAML includes simple representations such as nodes. It is also called as Representation Node Graph.
+
+It includes mapping, sequence and scalar quantities which is being serialized to create a serialization tree. With serialization the objects are converted with stream of bytes.
+
+The serialization event tree helps in creating presentation of character streams as represented in the following diagram.
+
+The reverse procedure parses the stream of bytes into serialized event tree. Later, the nodes are converted into node graph. These values are later converted in YAML native data structure. The figure below explains this −
+
+The information in YAML is used in two ways: machine processing and human consumption. The processor in YAML is used as a tool for the procedure of converting information between complementary views in the diagram given above. This chapter describes the information structures a YAML processor must provide within a given application.
+
+YAML includes a serialization procedure for representing data objects in serial format. The processing of YAML information includes three stages: Representation, Serialization, Presentation and parsing
+
+Representation
+YAML represents the data structure using three kinds of nodes: sequence, mapping and scalar.
+
+Sequence
+Sequence refers to the ordered number of entries, which maps the unordered association of key value pair. It corresponds to the Perl or Python array list.
+
+The code shown below is an example of sequence representation −
+
+product:
+   - sku         : BL394D
+     quantity    : 4
+     description : Football
+     price       : 450.00
+   - sku         : BL4438H
+     quantity    : 1
+     description : Super Hoop
+     price       : 2392.00
+     
+     Mapping
+Mapping on the other hand represents dictionary data structure or hash table. An example for the same is mentioned below −
+
+batchLimit: 1000
+threadCountLimit: 2
+key: value
+keyMapping: <What goes here?>
+Scalars
+Scalars represent standard values of strings, integers, dates and atomic data types. Note that YAML also includes nodes which specify the data type structure.
+
+Serialization
+Serialization process is required in YAML that eases human friendly key order and anchor names. The result of serialization is a YAML serialization tree. It can be traversed to produce a series of event calls of YAML data.
+
+An example for serialization is given below −
+
+consumer:
+class: 'AppBundle\Entity\consumer'
+attributes:
+filters: ['customer.search', 'customer.order', 'customer.boolean']
+collectionOperations:
+get:
+method: 'GET'
+normalization_context:
+groups: ['customer_list']
+itemOperations:
+get:
+method: 'GET'
+normalization_context:
+groups: ['customer_get']
+
+Presentation
+The final output of YAML serialization is called presentation. It represents a character stream in a human friendly manner. YAML processor includes various presentation details for creating stream, handling indentation and formatting content. This complete process is guided by the preferences of user.
+
+An example for YAML presentation process is the result of JSON value created. Observe the code given below for a better understanding −
+{
+   "consumer": {
+      "class": "AppBundle\\Entity\\consumer",
+      "attributes": {
+         "filters": [
+            "customer.search",
+            "customer.order",
+            "customer.boolean"
+         ]
+      },
+      "collectionOperations": {
+         "get": {
+            "method": "GET",
+            "normalization_context": {
+               "groups": [
+                  "customer_list"
+               ]
+            }
+         }
+      },
+      "itemOperations": {
+         "get": {
+            "method": "GET",
+            "normalization_context": {
+               "groups": [
+                  "customer_get"
+               ]
+            }
+         }
+      }
+   }
+}
+
+Parsing
+Parsing is the inverse process of presentation; it includes a stream of characters and creates a series of events. It discards the details introduced in the presentation process which causes serialization events. Parsing procedure can fail due to ill-formed input. It is basically a procedure to check whether YAML is well-formed or not.
+
+Consider a YAML example which is mentioned below −
+
+---
+   environment: production
+   classes:
+      nfs::server:
+         exports:
+            - /srv/share1
+            - /srv/share3
+   parameters:
+      paramter1
+      
+      With three hyphens, it represents the start of document with various attributes later defined in it.
+      
+      --------------------------------------------------------------------------------------------------------------------------------------------------------
 
